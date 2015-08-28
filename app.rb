@@ -61,6 +61,14 @@ patch('/bands/:id/rename') do
   redirect back
 end
 
+patch('/band/:id/venue') do
+  venue_id = params.fetch('venue_id').to_i()
+  venue = Venue.find(venue_id)
+  @band = Band.find(params.fetch('id').to_i())
+  @band.venues.push(venue)
+  redirect back
+end
+
 #############################
 ######---Venues-Page---######
 #############################
@@ -74,4 +82,27 @@ post('/venues') do
   title = params.fetch('title')
   Venue.create({:title => title})
   redirect('/venues')
+end
+
+#############################
+####---Venue-Page---#########
+#############################
+
+get('/venues/:id') do
+  @venue = Venue.find(params.fetch('id').to_i())
+  if @venue.bands
+    @band = @venue.bands
+  else
+    @band = nil
+  end
+  @bands = Band.all()
+  erb(:venue)
+end
+
+patch('/venues/:id/band') do
+  band_id = params.fetch('band_id').to_i()
+  band = Band.find(band_id)
+  @venue = Venue.find(params.fetch('id').to_i())
+  @venue.bands.push(band)
+  redirect back
 end

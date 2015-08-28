@@ -5,7 +5,7 @@
   <h3>Here are the bands that are playing at this venue:</h3>
   <ul>
     <% @venue.bands.each() do |venue_band| %>
-    <li><a href='/bands/<%= venue_band.id() %>'><%= venue_band.title() %></a> </li>
+    <li><a href='/bands/<%= venue_band.id() %>'><%= venue_band.name() %></a> </li>
 
     <% end %>
   </ul>
@@ -17,7 +17,7 @@
 
 <% end %>
 
-<p>Add a band to this venue</p>
+
 <p>Add a band to this venue:<p>
 <form id="add_band_id" action="/venues/<%= @venue.id() %>/band" method="post">
   <input name="_method" type="hidden" value="patch">
