@@ -1,0 +1,23 @@
+<h2>venues</h2>
+
+<% if @venues == [] %>
+
+  <p>There are no venues listed!</p>
+
+  <% else %>
+
+  <p>View All The Venues!</p>
+  <ul>
+    <% @venues.each() do |venue| %>
+    <li> <a href="/venues/<%= venue.id() %>"><%= venue.title() %></a></li>
+    <% end %>
+
+  </ul>
+<% end %>
+
+<h3> Add a recipe: </h3>
+<form action="/venues" method="post">
+  <label for="title">Recipe Name:  </label>
+  <input type="text" name="title" id="title">
+  <button type="submit">Add Venue</button>
+</form>
