@@ -19,8 +19,12 @@ end
 
 post('/bands') do
   name = params.fetch("name")
-  Band.create({:name => name})
-  redirect("/bands")
+  Band.new({:name => name, :done => false})
+  if @band.save()
+    redirect("/bands")
+  else
+    erb(:errors)
+  end
 end
 
 get('/bands/:id/delete_from_bands') do
