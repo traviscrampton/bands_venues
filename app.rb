@@ -19,9 +19,9 @@ end
 
 post('/bands') do
   name = params.fetch("name")
-  Band.new({:name => name, :done => false})
+  @band = Band.create({:name => name, :done => false})
   if @band.save()
-    redirect("/bands")
+    erb(:success)
   else
     erb(:errors)
   end
@@ -84,8 +84,12 @@ end
 
 post('/venues') do
   title = params.fetch('title')
-  Venue.create({:title => title})
-  redirect('/venues')
+  @venue = Venue.create({:title => title, :done => false})
+  if @venue.save()
+    erb(:success)
+  else
+    erb(:errors)
+  end
 end
 
 #############################
